@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default function ServicesPage() {
   return (
@@ -45,6 +46,17 @@ export default function ServicesPage() {
             </div>
           </div>
 
+          <Tabs defaultValue="all" className="mt-6">
+            <TabsList>
+              <TabsTrigger value="all">All Services</TabsTrigger>
+              <TabsTrigger value="design">Design</TabsTrigger>
+              <TabsTrigger value="development">Development</TabsTrigger>
+              <TabsTrigger value="marketing">Marketing</TabsTrigger>
+              <TabsTrigger value="writing">Writing</TabsTrigger>
+              <TabsTrigger value="business">Business</TabsTrigger>
+            </TabsList>
+          </Tabs>
+
           <div className="mt-6 flex flex-col gap-4 md:flex-row">
             <div className="w-full md:w-64">
               <Card>
@@ -56,18 +68,17 @@ export default function ServicesPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Category</label>
+                    <label className="text-sm font-medium">Experience Level</label>
                     <Select defaultValue="all">
                       <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
+                        <SelectValue placeholder="Select experience level" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Categories</SelectItem>
-                        <SelectItem value="design">Design</SelectItem>
-                        <SelectItem value="development">Development</SelectItem>
-                        <SelectItem value="marketing">Marketing</SelectItem>
-                        <SelectItem value="writing">Writing</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="all">All Levels</SelectItem>
+                        <SelectItem value="student">Student</SelectItem>
+                        <SelectItem value="junior">Junior Pro</SelectItem>
+                        <SelectItem value="mid">Mid-Level Pro</SelectItem>
+                        <SelectItem value="senior">Senior Pro</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -98,6 +109,35 @@ export default function ServicesPage() {
                         <SelectItem value="3.5">3.5+ Stars</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Skills</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="skill-ui" className="rounded border-muted-foreground" />
+                        <label htmlFor="skill-ui" className="text-sm">
+                          UI Design
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="skill-ux" className="rounded border-muted-foreground" />
+                        <label htmlFor="skill-ux" className="text-sm">
+                          UX Design
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="skill-web" className="rounded border-muted-foreground" />
+                        <label htmlFor="skill-web" className="text-sm">
+                          Web Dev
+                        </label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="skill-mobile" className="rounded border-muted-foreground" />
+                        <label htmlFor="skill-mobile" className="text-sm">
+                          Mobile Dev
+                        </label>
+                      </div>
+                    </div>
                   </div>
                   <Button className="w-full">Apply Filters</Button>
                 </CardContent>
@@ -132,36 +172,60 @@ export default function ServicesPage() {
                           className="h-10 w-10 rounded-full object-cover"
                         />
                         <div>
-                          <CardTitle className="text-base">
-                            {
-                              [
-                                "Web Design Help",
-                                "Logo Feedback",
-                                "SEO Consultation",
-                                "Content Writing",
-                                "UI/UX Review",
-                                "Social Media Strategy",
-                                "Programming Help",
-                                "Marketing Advice",
-                                "Business Mentoring",
-                              ][i % 9]
-                            }
-                          </CardTitle>
-                          <CardDescription>
-                            {
-                              [
-                                "Alex Morgan",
-                                "Jamie Smith",
-                                "Taylor Wong",
-                                "Jordan Lee",
-                                "Casey Johnson",
-                                "Riley Brown",
-                                "Sam Davis",
-                                "Quinn Wilson",
-                                "Avery Martinez",
-                              ][i % 9]
-                            }
-                          </CardDescription>
+                          <div className="flex items-center gap-2">
+                            <CardTitle className="text-base">
+                              {
+                                [
+                                  "Web Design Help",
+                                  "Logo Feedback",
+                                  "SEO Consultation",
+                                  "Content Writing",
+                                  "UI/UX Review",
+                                  "Social Media Strategy",
+                                  "Programming Help",
+                                  "Marketing Advice",
+                                  "Business Mentoring",
+                                ][i % 9]
+                              }
+                            </CardTitle>
+                            {i % 3 === 0 && (
+                              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                                Featured
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <CardDescription>
+                              {
+                                [
+                                  "Alex Morgan",
+                                  "Jamie Smith",
+                                  "Taylor Wong",
+                                  "Jordan Lee",
+                                  "Casey Johnson",
+                                  "Riley Brown",
+                                  "Sam Davis",
+                                  "Quinn Wilson",
+                                  "Avery Martinez",
+                                ][i % 9]
+                              }
+                            </CardDescription>
+                            <span className="text-xs bg-muted px-1.5 py-0.5 rounded-full">
+                              {
+                                [
+                                  "Junior Pro",
+                                  "Student",
+                                  "Mid-Level Pro",
+                                  "Junior Pro",
+                                  "Senior Pro",
+                                  "Student",
+                                  "Mid-Level Pro",
+                                  "Junior Pro",
+                                  "Senior Pro",
+                                ][i % 9]
+                              }
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </CardHeader>
@@ -202,9 +266,46 @@ export default function ServicesPage() {
                           ][i % 9]
                         }
                       </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {[
+                          ["UI Design", "UX", "Responsive"],
+                          ["Logo Design", "Branding", "Feedback"],
+                          ["SEO", "Analytics", "Keywords"],
+                          ["Content", "Copywriting", "Editing"],
+                          ["UI/UX", "Wireframing", "Prototyping"],
+                          ["Social Media", "Strategy", "Content"],
+                          ["JavaScript", "React", "Node.js"],
+                          ["Marketing", "Strategy", "Growth"],
+                          ["Business", "Startups", "Strategy"],
+                        ][i % 9].map((tag, j) => (
+                          <span key={j} className="text-xs bg-muted px-2 py-0.5 rounded-full">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 bg-muted/50 p-2 rounded-md">
+                        <div className="text-xs font-medium">Portfolio Goals:</div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {
+                            [
+                              "Looking to expand my portfolio with e-commerce projects",
+                              "Building a branding portfolio for agency applications",
+                              "Gaining experience in SEO for tech companies",
+                              "Building a content writing portfolio for tech and SaaS",
+                              "Expanding UX case studies for my portfolio",
+                              "Building social media strategy examples for my resume",
+                              "Creating real-world programming examples for job interviews",
+                              "Developing marketing case studies for my portfolio",
+                              "Building business consulting experience for my resume",
+                            ][i % 9]
+                          }
+                        </p>
+                      </div>
                     </CardContent>
                     <CardFooter>
-                      <Button className="w-full">Request Help</Button>
+                      <Link href="/profile" className="w-full">
+                        <Button className="w-full">Request Help</Button>
+                      </Link>
                     </CardFooter>
                   </Card>
                 ))}

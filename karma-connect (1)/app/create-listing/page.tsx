@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Heart } from "lucide-react"
+import { ArrowLeft, Heart, Info } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function CreateListingPage() {
   const [formStep, setFormStep] = useState(1)
@@ -88,6 +89,9 @@ export default function CreateListingPage() {
               <div className="space-y-2">
                 <Label htmlFor="title">Service Title</Label>
                 <Input id="title" placeholder="e.g., Web Design Consultation, Logo Feedback" required />
+                <p className="text-xs text-muted-foreground">
+                  Be specific about what you're offering to attract the right projects for your portfolio
+                </p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="category">Category</Label>
@@ -119,6 +123,31 @@ export default function CreateListingPage() {
                   </SelectContent>
                 </Select>
               </div>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="portfolio-goals">Portfolio Goals</Label>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Info className="h-4 w-4 text-muted-foreground" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="max-w-xs">
+                          What do you want to gain from this experience? What types of projects are you looking to add
+                          to your portfolio?
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+                <Textarea
+                  id="portfolio-goals"
+                  placeholder="e.g., I want to expand my design portfolio with e-commerce projects, or I'm looking to gain experience in content writing for tech companies"
+                />
+                <p className="text-xs text-muted-foreground">
+                  This helps potential clients understand what you're looking to gain from the experience
+                </p>
+              </div>
             </CardContent>
             <CardFooter className="flex justify-end">
               <Button onClick={goToNextStep}>Continue</Button>
@@ -133,6 +162,17 @@ export default function CreateListingPage() {
               <CardDescription>Provide more information about your service</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="deliverable">Exact Deliverable</Label>
+                <Input
+                  id="deliverable"
+                  placeholder="e.g., One website design mockup, 5-page content strategy document"
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  Be specific about what you'll provide so it's clear what will be added to your portfolio
+                </p>
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
@@ -158,6 +198,47 @@ export default function CreateListingPage() {
                   className="min-h-[100px]"
                 />
               </div>
+              <div className="space-y-2">
+                <Label>Skills Used</Label>
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-ui" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-ui" className="text-sm">
+                      UI Design
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-ux" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-ux" className="text-sm">
+                      UX Design
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-figma" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-figma" className="text-sm">
+                      Figma
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-responsive" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-responsive" className="text-sm">
+                      Responsive
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-branding" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-branding" className="text-sm">
+                      Branding
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="skill-other" className="rounded border-muted-foreground" />
+                    <Label htmlFor="skill-other" className="text-sm">
+                      Other
+                    </Label>
+                  </div>
+                </div>
+              </div>
             </CardContent>
             <CardFooter className="flex justify-between">
               <Button variant="outline" onClick={goToPreviousStep}>
@@ -182,19 +263,33 @@ export default function CreateListingPage() {
                   <span>•</span>
                   <span>2 hours/week</span>
                 </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="text-xs bg-muted px-2 py-0.5 rounded-full">UI Design</span>
+                  <span className="text-xs bg-muted px-2 py-0.5 rounded-full">UX Design</span>
+                  <span className="text-xs bg-muted px-2 py-0.5 rounded-full">Figma</span>
+                  <span className="text-xs bg-muted px-2 py-0.5 rounded-full">Responsive</span>
+                </div>
+                <div className="mt-4">
+                  <div className="text-sm font-medium">Portfolio Goals:</div>
+                  <p className="mt-1 text-sm">I want to expand my design portfolio with e-commerce projects.</p>
+                </div>
+                <div className="mt-4">
+                  <div className="text-sm font-medium">Deliverable:</div>
+                  <p className="mt-1 text-sm">One website design mockup with feedback document</p>
+                </div>
                 <p className="mt-4">
                   I'll help you improve your website design with professional feedback and suggestions. Perfect for
                   small businesses and startups looking to enhance their online presence.
                 </p>
                 <div className="mt-4">
-                  <h4 className="font-medium">Experience:</h4>
+                  <div className="text-sm font-medium">Experience:</div>
                   <p className="mt-1 text-sm">
                     5+ years of experience as a UI/UX designer working with various clients from startups to established
                     businesses.
                   </p>
                 </div>
                 <div className="mt-4">
-                  <h4 className="font-medium">What I Need From You:</h4>
+                  <div className="text-sm font-medium">What I Need From You:</div>
                   <p className="mt-1 text-sm">
                     Access to your current website, information about your target audience, and any specific areas you'd
                     like me to focus on.
